@@ -33,7 +33,7 @@ class Trainer(object):
             torch.cuda.set_device(args.gpu)
 
         self.entity2id, self.relation2id, self.time2id, self.train_quads, self.valid_quads, self.test_quads, _ = utils.load_data_quadruples(f'./dataset/{args.data}')
-        self.meta_train_task_entity_to_quads, self.meta_valid_task_entity_to_quads, self.meta_test_task_entity_to_quads = utils.load_processed_data_quadruples(f'./dataset/{args.data}/processed_data_{args.data_version}')
+        self.meta_train_task_entity_to_quads, self.meta_valid_task_entity_to_quads, self.meta_test_task_entity_to_quads = utils.load_processed_data_quadruples(f'./dataset/{args.data}/processed_data')
 
         self.all_quads = torch.LongTensor(np.concatenate((
             self.train_quads, self.valid_quads, self.test_quads
@@ -67,7 +67,7 @@ class Trainer(object):
 
         if self.args.pre_train:
 
-            pretrain_model_path = './pretrain/{}/{}'.format(self.args.data, self.args.pre_train)
+            pretrain_model_path = './pretrain/{}/'.format(self.args.data)
             self.logger.info("load pre-train embedding from {}".format(pretrain_model_path))
 
             entity_file_name = os.path.join(pretrain_model_path, '{}_entity_{}.npy'.format(self.args.pre_train_model, self.embedding_size))
@@ -325,7 +325,7 @@ class Trainer(object):
 
         ts = time.strftime('%Y%b%d-%H%M%S', time.gmtime())
 
-        exp_name = f'{ts}_{args.data}_{args.data_version}_{args.time_mode}_{args.few}-shot'
+        exp_name = f'{ts}_{args.data}_{args.time_mode}_{args.few}-shot'
 
         if not args.debug:
             if not(os.path.isdir('./checkpoints/{}'.format(ts))):
@@ -343,7 +343,6 @@ if __name__ == '__main__':
     parser.add_argument("--debug", action='store_true')
 
     parser.add_argument("--data", type=str, default="ICEWS14")
-    parser.add_argument("--data-version", type=str, default='v1')
     parser.add_argument("--negative-sample", type=int, default=32)
 
     parser.add_argument("--few", type=int, default=3)
@@ -358,7 +357,7 @@ if __name__ == '__main__':
     parser.add_argument("--margin", type=float, default=1.0)
     parser.add_argument("--dropout", type=float, default=0.3)
 
-    parser.add_argument("--pre-train", type=str, default=None)  # folder suffix, e.g. v0
+    parser.add_argument("--pre-train", type=int, default=1)
     parser.add_argument("--fine-tune", action='store_true')
 
     parser.add_argument("--pre-train-model", type=str, default='ComplEx')
@@ -386,4 +385,4 @@ if __name__ == '__main__':
     trainer.train()
     # print(args)
 
-# python train.py --data ICEWS14 --data-version v0 --pre-train v0 --time-mode tw --fine-tune --rev-rel-emb --gpu 0 --few 3 --concept --res-cof 0.1 --debug
+# python train.py --data ICEWS14 --time-mode tw --fine-tune --rev-rel-emb --gpu 0 --few 3 --concept --res-cof 0.1 --debug

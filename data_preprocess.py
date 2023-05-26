@@ -178,7 +178,7 @@ all_quadruples_to_use = np.concatenate(
     (filtered_quadruples, meta_train_task_quadruples, meta_valid_task_quadruples, meta_test_task_quadruples))
 # print('num_all_quadruples: {}'.format(len(all_quadruples_to_use)))
 
-save_folder = './dataset/ICEWS14/processed_data_v1/'
+save_folder = './dataset/ICEWS14/processed_data/'
 os.makedirs(save_folder, exist_ok=True)
 
 with open(save_folder + 'filtered_quadruples.pickle', 'wb') as f:

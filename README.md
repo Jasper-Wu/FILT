@@ -28,7 +28,7 @@ conda install pyg -c pyg
 
 The preprocessed ICEWS14 dataset is already in the repository, including the raw dataset and the dataset for meta-learning
 - raw dataset: already mapped to integers
-- meta-learning dataset: stored in `./dataset/ICEWS14/processed_data_v0/`
+- meta-learning dataset: stored in `./dataset/ICEWS14/processed_data/`
 - the script for generating the meta-learning dataset is './data_preprocess.py'
 
 In addition, you have to generate the entity-to-sector matrix with the following command
@@ -41,5 +41,5 @@ python generate_ent2sec_mat.py
 Training  FILT on ICEWS14:
 
 ```
-python train.py --data ICEWS14 --data-version v0 --pre-train v0 --time-mode tw --fine-tune --rev-rel-emb --few 3 --concept --res-cof 0.1 --gpu 0
+python train.py --data ICEWS14 --time-mode tw --fine-tune --rev-rel-emb --few 3 --concept --res-cof 0.1 --gpu 0
 ```
