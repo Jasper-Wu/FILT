@@ -4,7 +4,7 @@ code for AKBC2022 paper *Few-Shot Inductive Learning on Temporal Knowledge Graph
 ## Pretrain Embedding
 
 - We provide the ComplEx pretrain embedding for ICEWS14-OOG, ICEWS0515-OOG, ICEWS18-OOG in https://drive.google.com/file/d/1aUemsoBCF7FOFgM_V52-beFzwWU6ztBo/view?usp=sharing
-- Put the embeddings in folder `./pretrain/`
+- Rename the folder as `./pretrain/`
 
 ## Installation
 Create a conda environment
@@ -30,7 +30,7 @@ conda install pyg -c pyg
 The preprocessed ICEWS14 dataset is already in the repository, including the raw dataset and the dataset for meta-learning
 - raw dataset: already mapped to integers
 - meta-learning dataset: stored in `./dataset/ICEWS14/processed_data/`
-- the script for generating the meta-learning dataset is './data_preprocess.py'
+- the script for generating the meta-learning dataset is `./data_preprocess.py`
 
 In addition, you have to generate the entity-to-sector matrix with the following command
 ```
